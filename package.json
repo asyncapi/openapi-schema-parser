@@ -4,7 +4,8 @@
   "description": "An AsyncAPI schema parser for OpenAPI 3.0.x and Swagger 2.x schemas.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "release": "semantic-release"
   },
   "repository": {
     "type": "git",
