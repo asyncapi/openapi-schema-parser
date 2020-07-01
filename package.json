@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha --recursive",
     "release": "semantic-release",
+    "lint": "eslint --config .eslintrc .",
     "get-version": "echo $npm_package_version"
   },
   "repository": {
@@ -32,7 +33,7 @@
     "@openapi-contrib/openapi-schema-to-json-schema": "^3.0.0"
   },
   "devDependencies": {
-    "asyncapi-parser": "^0.14.0",
+    "@asyncapi/parser": "^0.22.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "mocha": "^7.1.0",
@@ -41,7 +42,10 @@
     "@semantic-release/npm": "^7.0.3",
     "@semantic-release/release-notes-generator": "^9.0.1",
     "conventional-changelog-conventionalcommits": "^4.2.3",
-    "semantic-release": "^17.0.4"
+    "semantic-release": "^17.0.4",
+    "eslint": "^6.8.0",
+    "eslint-plugin-mocha": "^7.0.1",
+    "eslint-plugin-sonarjs": "^0.5.0"
   },
   "release": {
     "branches": [

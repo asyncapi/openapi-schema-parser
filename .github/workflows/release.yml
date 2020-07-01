@@ -20,6 +20,8 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
+      - name: Run linter
+        run: npm run lint
       - name: Get version from package.json before release step
         id: initversion
         run: echo "::set-output name=version::$(npm run get-version --silent)"
