@@ -1,6 +1,11 @@
 const toJsonSchema = require('@openapi-contrib/openapi-schema-to-json-schema');
 
-module.exports = async ({ message, defaultSchemaFormat }) => {
+module.exports = {
+  parse,
+  getMimeTypes
+}
+
+async function parse({ message, defaultSchemaFormat }) {
   const transformed = toJsonSchema(message.payload, {
     cloneSchema: true,
     keepNotSupported: [
@@ -55,4 +60,12 @@ function aliasProps(obj) {
 
     iterateSchema(obj[key]);
   }
+}
+
+function getMimeTypes() {
+  return [
+    'application/vnd.oai.openapi;version=3.0.0',
+    'application/vnd.oai.openapi+json;version=3.0.0',
+    'application/vnd.oai.openapi+yaml;version=3.0.0',
+  ]
 }
