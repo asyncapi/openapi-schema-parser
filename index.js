@@ -24,7 +24,7 @@ async function parse({ message, defaultSchemaFormat }) {
   message['x-parser-original-payload'] = message.payload;
   message.payload = transformed;
   delete message.schemaFormat;
-};
+}
 
 function iterateSchema(schema) {
   if (schema.example !== undefined) {
