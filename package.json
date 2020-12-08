@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --recursive",
     "release": "semantic-release",
-    "lint": "eslint --config .eslintrc .",
+    "lint": "eslint --max-warnings 0 --config .eslintrc .",
     "get-version": "echo $npm_package_version"
   },
   "repository": {
