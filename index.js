@@ -1,6 +1,11 @@
 const toJsonSchema = require('@openapi-contrib/openapi-schema-to-json-schema');
 
-module.exports = async ({ message, defaultSchemaFormat }) => {
+module.exports = {
+  parse,
+  getMimeTypes
+};
+
+async function parse({ message, defaultSchemaFormat }) {
   const transformed = toJsonSchema(message.payload, {
     cloneSchema: true,
     keepNotSupported: [
@@ -19,7 +24,7 @@ module.exports = async ({ message, defaultSchemaFormat }) => {
   message['x-parser-original-payload'] = message.payload;
   message.payload = transformed;
   delete message.schemaFormat;
-};
+}
 
 function iterateSchema(schema) {
   if (schema.example !== undefined) {
@@ -45,7 +50,7 @@ function iterateSchema(schema) {
 }
 
 function aliasProps(obj) {
-  for (let key in obj) {
+  for (const key in obj) {
     const prop = obj[key];
 
     if (prop.xml !== undefined) {
@@ -55,4 +60,12 @@ function aliasProps(obj) {
 
     iterateSchema(obj[key]);
   }
+}
+
+function getMimeTypes() {
+  return [
+    'application/vnd.oai.openapi;version=3.0.0',
+    'application/vnd.oai.openapi+json;version=3.0.0',
+    'application/vnd.oai.openapi+yaml;version=3.0.0',
+  ];
 }

@@ -1,10 +1,14 @@
 {
   "name": "@asyncapi/openapi-schema-parser",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An AsyncAPI schema parser for OpenAPI 3.0.x and Swagger 2.x schemas.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "release": "semantic-release",
+    "lint": "eslint --max-warnings 0 --config .eslintrc .",
+    "get-version": "echo $npm_package_version",
+    "get-name": "echo $npm_package_name"
   },
   "repository": {
     "type": "git",
@@ -18,6 +22,9 @@
     "parser"
   ],
   "author": "Fran Mendez (fmvilas.com)",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/asyncapi/openapi-schema-parser/issues"
@@ -27,9 +34,39 @@
     "@openapi-contrib/openapi-schema-to-json-schema": "^3.0.0"
   },
   "devDependencies": {
-    "asyncapi-parser": "^0.14.0",
+    "@asyncapi/parser": "^1.2.0",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/github": "^7.0.4",
+    "@semantic-release/npm": "^7.0.3",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^7.1.0"
+    "conventional-changelog-conventionalcommits": "^4.2.3",
+    "eslint": "^6.8.0",
+    "eslint-plugin-mocha": "^7.0.1",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "mocha": "^7.1.0",
+    "semantic-release": "^17.0.4"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   }
 }

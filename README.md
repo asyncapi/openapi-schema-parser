@@ -35,11 +35,7 @@ channels:
               example: Jack Johnson
 `
 
-parser.registerSchemaParser([
-  'application/vnd.oai.openapi;version=3.0.0',
-  'application/vnd.oai.openapi+json;version=3.0.0',
-  'application/vnd.oai.openapi+yaml;version=3.0.0',
-], openapiSchemaParser);
+parser.registerSchemaParser(openapiSchemaParser);
 
 await parser.parse(asyncapiWithOpenAPI)
 ```
@@ -64,9 +60,7 @@ channels:
           $ref: 'yourserver.com/schemas#/Book'
 `
 
-parser.registerSchemaParser([
-  'application/vnd.oai.openapi;version=3.0.0',
-], openapiSchemaParser)
+parser.registerSchemaParser(openapiSchemaParser)
 
 await parser.parse(asyncapiWithOpenAPI)
 ```
