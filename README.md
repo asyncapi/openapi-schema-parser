@@ -50,7 +50,7 @@ channels:
             author:
               type: string
               example: Jack Johnson
-`
+`;
 
 const { document } = await parser.parse(asyncapiWithOpenAPI);
 ```
@@ -76,7 +76,7 @@ channels:
         schemaFormat: 'application/vnd.oai.openapi;version=3.0.0'
         payload:
           $ref: 'yourserver.com/schemas#/Book'
-`
+`;
 
 const { document } = await parser.parse(asyncapiWithOpenAPI);
 ```
