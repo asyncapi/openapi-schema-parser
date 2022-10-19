@@ -1,9 +1,10 @@
-asyncapi: 2.0.0
+asyncapi: 2.4.0
 info:
   title: My API
   version: '1.0.0'
+
 channels:
-  mychannel:
+  myChannel:
     publish:
       message:
         $ref: '#/components/messages/testMessage'
@@ -11,21 +12,19 @@ channels:
 components:
   messages:
     testMessage:
-      schemaFormat: 'application/vnd.oai.openapi;version=3.0.0'
+      schemaFormat: application/vnd.oai.openapi;version=3.0.0
       payload:
-        $ref: '#/components/schemas/testSchema'
-  schemas:
-    testSchema:
-      type: object
-      nullable: true
-      example:
-        name: Fran
-      properties:
-        name:
-          type: string
-        discriminatorTest:
-          discriminator: objectType
-          oneOf:
+        type: object
+        nullable: true
+        example:
+          name: Fran
+        properties:
+          name:
+            type: string
+          discriminatorTest:
+            discriminator:
+              propertyName: objectType
+            oneOf:
             - type: object
               properties:
                 objectType:
@@ -38,7 +37,9 @@ components:
                   type: string
                 prop2:
                   type: string
+          test:
+            type: object
+            properties:
+              testing:
+                type: string
 
-        test:
-          $ref: 'refs/refed.yaml'
-          

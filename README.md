@@ -2,17 +2,25 @@
 
 An AsyncAPI schema parser for OpenAPI 3.0.x and Swagger 2.x schemas.
 
+> **Note**
+> Version >= `3.0.0` of package is only supported by `@asyncapi/parser` version >= `2.0.0`
+
 ## Installation
 
-```
+```bash
 npm install @asyncapi/openapi-schema-parser
+// OR
+yarn add @asyncapi/openapi-schema-parser
 ```
 
 ## Usage
 
-```js
-const parser = require('asyncapi-parser')
-const openapiSchemaParser = require('@asyncapi/openapi-schema-parser')
+```ts
+import { Parser } from '@asyncapi/parser';
+import { OpenAPISchemaParser } from '@asyncapi/openapi-schema-parser';
+
+const parser = new Parser();
+parser.registerSchemaParser(OpenAPISchemaParser()); 
 
 const asyncapiWithOpenAPI = `
 asyncapi: 2.0.0
@@ -35,16 +43,17 @@ channels:
               example: Jack Johnson
 `
 
-parser.registerSchemaParser(openapiSchemaParser);
-
-await parser.parse(asyncapiWithOpenAPI)
+const { document } = await parser.parse(asyncapiWithOpenAPI);
 ```
 
 It also supports referencing remote OpenAPI schemas:
 
-```js
-const parser = require('asyncapi-parser')
-const openapiSchemaParser = require('@asyncapi/openapi-schema-parser')
+```ts
+import { Parser } from '@asyncapi/parser';
+import { OpenAPISchemaParser } from '@asyncapi/openapi-schema-parser';
+
+const parser = new Parser();
+parser.registerSchemaParser(OpenAPISchemaParser()); 
 
 const asyncapiWithOpenAPI = `
 asyncapi: 2.0.0
@@ -60,7 +69,5 @@ channels:
           $ref: 'yourserver.com/schemas#/Book'
 `
 
-parser.registerSchemaParser(openapiSchemaParser)
-
-await parser.parse(asyncapiWithOpenAPI)
+const { document } = await parser.parse(asyncapiWithOpenAPI);
 ```
