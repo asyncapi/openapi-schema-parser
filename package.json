@@ -10,7 +10,7 @@
     "lint": "eslint --max-warnings 0 --config .eslintrc .",
     "lint:fix": "eslint --max-warnings 0 --config .eslintrc . --fix",
     "generate:readme:toc": "markdown-toc -i \"README.md\"",
-    "generate:assets": "echo 'No additional assets need to be generated at the moment'",
+    "generate:assets": "npm run build && npm run generate:readme:toc",
     "bump:version": "npm --no-git-tag-version --allow-same-version version $VERSION",
     "prepublishOnly": "npm run generate:assets",
     "release": "semantic-release"

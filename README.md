@@ -5,6 +5,15 @@ An AsyncAPI schema parser for OpenAPI 3.0.x and Swagger 2.x schemas.
 > **Note**
 > Version >= `3.0.0` of package is only supported by `@asyncapi/parser` version >= `2.0.0`
 
+<!-- toc is generated with GitHub Actions do not remove toc markers -->
+
+<!-- toc -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+
+<!-- tocstop -->
+
 ## Installation
 
 ```bash
