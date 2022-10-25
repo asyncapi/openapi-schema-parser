@@ -1,4 +1,3 @@
-
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import ajvErrors from 'ajv-errors';
@@ -6,8 +5,7 @@ import { jsonSchemaV3 } from './json-schema-v3';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const toJsonSchema = require('@openapi-contrib/openapi-schema-to-json-schema');
 
-import type { SchemaParser, ValidateSchemaInput, ParseSchemaInput, SchemaValidateResult } from '@asyncapi/parser';
-import type { v2 } from '@asyncapi/parser/esm/spec-types';
+import type { SchemaParser, ValidateSchemaInput, ParseSchemaInput, SchemaValidateResult, SpecTypesV2 } from '@asyncapi/parser';
 import type { ValidateFunction, ErrorObject } from 'ajv';
 
 export function OpenAPISchemaParser(): SchemaParser {
@@ -31,7 +29,7 @@ async function validate(input: ValidateSchemaInput<unknown, unknown>): Promise<S
   return result;
 }
 
-async function parse(input: ParseSchemaInput<unknown, unknown>): Promise<v2.SchemaObject> {
+async function parse(input: ParseSchemaInput<unknown, unknown>): Promise<SpecTypesV2.SchemaObject> {
   const transformed = toJsonSchema(input.data, {
     cloneSchema: true,
     keepNotSupported: [

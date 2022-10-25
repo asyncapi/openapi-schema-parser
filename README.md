@@ -55,6 +55,37 @@ channels:
 const { document } = await parser.parse(asyncapiWithOpenAPI);
 ```
 
+```js
+const { Parser } = require('@asyncapi/parser');
+const { OpenAPISchemaParser } = require('@asyncapi/openapi-schema-parser');
+
+const parser = new Parser();
+parser.registerSchemaParser(OpenAPISchemaParser()); 
+
+const asyncapiWithOpenAPI = `
+asyncapi: 2.0.0
+info:
+  title: Example with OpenAPI
+  version: 0.1.0
+channels:
+  example:
+    publish:
+      message:
+        schemaFormat: 'application/vnd.oai.openapi;version=3.0.0'
+        payload: # The following is an OpenAPI schema
+          type: object
+          properties:
+            title:
+              type: string
+              nullable: true
+            author:
+              type: string
+              example: Jack Johnson
+`;
+
+const { document } = await parser.parse(asyncapiWithOpenAPI);
+```
+
 It also supports referencing remote OpenAPI schemas:
 
 ```ts
