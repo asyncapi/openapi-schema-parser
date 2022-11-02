@@ -80,7 +80,19 @@
   },
   "release": {
     "branches": [
-      "master"
+      "master",
+      {
+        "name": "next-spec",
+        "prerelease": true
+      },
+      {
+        "name": "next-major-spec",
+        "prerelease": true
+      },
+      {
+        "name": "next-major",
+        "prerelease": true
+      }
     ],
     "plugins": [
       [
@@ -96,7 +108,12 @@
         }
       ],
       "@semantic-release/npm",
-      "@semantic-release/github"
+      [
+        "@semantic-release/github",
+        {
+          "assets": []
+        }
+      ]
     ]
   }
 }
