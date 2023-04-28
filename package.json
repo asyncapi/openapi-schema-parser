@@ -33,7 +33,7 @@
     "@openapi-contrib/openapi-schema-to-json-schema": "~3.2.0"
   },
   "devDependencies": {
-    "@asyncapi/parser": "^1.18.1",
+    "@asyncapi/parser": "^2.0.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^6.8.0",
