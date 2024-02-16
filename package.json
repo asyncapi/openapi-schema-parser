@@ -1,6 +1,6 @@
 {
   "name": "@asyncapi/openapi-schema-parser",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "description": "An AsyncAPI schema parser for OpenAPI 3.0.x and Swagger 2.x schemas.",
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
