@@ -30,7 +30,9 @@ async function validate(input: ValidateSchemaInput<unknown, unknown>): Promise<S
 }
 
 async function parse(input: ParseSchemaInput<unknown, unknown>): Promise<SpecTypesV2.SchemaObject> {
-  const transformed = toJsonSchema(input.data, {
+  // cloning input, because input schema is modified during transformation despite setting cloneSchema
+  const inputSchema = structuredClone(input.data);
+  const transformed = toJsonSchema(inputSchema, {
     cloneSchema: true,
     keepNotSupported: [
       'discriminator',
