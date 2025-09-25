@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { Parser } from '@asyncapi/parser';
 import { OpenAPISchemaParser } from '../src';
 
@@ -68,12 +68,12 @@ describe('OpenAPISchemaParser', function () {
   it('should parse valid AsyncAPI', async function() {
     const { document, diagnostics } = await coreParser.parse(inputWithValidAsyncAPI);
     expect(filterDiagnostics(diagnostics, 'asyncapi2-schemas')).toHaveLength(0);
-    doParseCoreTest((document?.json()?.channels?.myChannel?.publish?.message as any)?.payload, outputWithValidOpenApi3);
-    doParseCoreTest((document?.json()?.components?.messages?.testMessage as any)?.payload, outputWithValidOpenApi3);
+    await doParseCoreTest((document?.json()?.channels?.myChannel?.publish?.message as any)?.payload, outputWithValidOpenApi3);
+    await doParseCoreTest((document?.json()?.components?.messages?.testMessage as any)?.payload, outputWithValidOpenApi3);
   });
 
   it('should parse valid AsyncAPI3', async function() {
-    const { document, diagnostics } = await coreParser.parse(inputWithValidAsyncAPI3);
+    const { diagnostics } = await coreParser.parse(inputWithValidAsyncAPI3);
     expect(diagnostics).toHaveLength(0);
   });
 
@@ -147,17 +147,17 @@ describe('OpenAPISchemaParser', function () {
     // Check that the return value of parse() is the expected JSON Schema.
     expect(result).toEqual(JSON.parse(expectedOutput));
   }
-
-  async function doParseCoreTest(parsedSchema: any, expectedOutput: string) {
-    const result = JSON.parse(JSON.stringify(parsedSchema, (field: string, value: unknown) => {
-      if (field === 'x-parser-schema-id') return;
-      return value;
-    }));
-
-    // Check that the return value of parse() is the expected JSON Schema.
-    expect(result).toEqual(JSON.parse(expectedOutput));
-  }
 });
+
+async function doParseCoreTest(parsedSchema: any, expectedOutput: string) {
+  const result = JSON.parse(JSON.stringify(parsedSchema, (field: string, value: unknown) => {
+    if (field === 'x-parser-schema-id') return;
+    return value;
+  }));
+
+  // Check that the return value of parse() is the expected JSON Schema.
+  expect(result).toEqual(JSON.parse(expectedOutput));
+}
 
 function toParseInput(raw: string): ParseSchemaInput | ValidateSchemaInput {
   const message = JSON.parse(raw);
