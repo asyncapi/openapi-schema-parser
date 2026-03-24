@@ -73,7 +73,7 @@ describe('OpenAPISchemaParser', function () {
   });
 
   it('should parse valid AsyncAPI3', async function() {
-    const { document, diagnostics } = await coreParser.parse(inputWithValidAsyncAPI3);
+    const { diagnostics } = await coreParser.parse(inputWithValidAsyncAPI3);
     expect(diagnostics).toHaveLength(0);
   });
 
