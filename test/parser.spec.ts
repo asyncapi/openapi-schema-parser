@@ -68,8 +68,8 @@ describe('OpenAPISchemaParser', function () {
   it('should parse valid AsyncAPI', async function() {
     const { document, diagnostics } = await coreParser.parse(inputWithValidAsyncAPI);
     expect(filterDiagnostics(diagnostics, 'asyncapi2-schemas')).toHaveLength(0);
-    doParseCoreTest((document?.json()?.channels?.myChannel?.publish?.message as any)?.payload, outputWithValidOpenApi3);
-    doParseCoreTest((document?.json()?.components?.messages?.testMessage as any)?.payload, outputWithValidOpenApi3);
+    await doParseCoreTest((document?.json()?.channels?.myChannel?.publish?.message as any)?.payload, outputWithValidOpenApi3);
+    await doParseCoreTest((document?.json()?.components?.messages?.testMessage as any)?.payload, outputWithValidOpenApi3);
   });
 
   it('should parse valid AsyncAPI3', async function() {
