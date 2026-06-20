@@ -3,10 +3,11 @@ import addFormats from 'ajv-formats';
 import ajvErrors from 'ajv-errors';
 import { jsonSchemaV3 } from './json-schema-v3';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const toJsonSchema = require('@openapi-contrib/openapi-schema-to-json-schema');
+import toJsonSchema from '@openapi-contrib/openapi-schema-to-json-schema';
 
 import type { SchemaParser, ValidateSchemaInput, ParseSchemaInput, SchemaValidateResult, SpecTypesV2 } from '@asyncapi/parser';
 import type { ValidateFunction, ErrorObject } from 'ajv';
+import {AcceptibleInputSchema} from '@openapi-contrib/openapi-schema-to-json-schema/src/openapi-schema-types';
 
 export function OpenAPISchemaParser(): SchemaParser {
   return {
@@ -30,7 +31,7 @@ async function validate(input: ValidateSchemaInput<unknown, unknown>): Promise<S
 }
 
 async function parse(input: ParseSchemaInput<unknown, unknown>): Promise<SpecTypesV2.SchemaObject> {
-  const transformed = toJsonSchema(input.data, {
+  const transformed = toJsonSchema(input.data as AcceptibleInputSchema, {
     cloneSchema: true,
     keepNotSupported: [
       'discriminator',
@@ -43,7 +44,7 @@ async function parse(input: ParseSchemaInput<unknown, unknown>): Promise<SpecTyp
   });
     
   iterateSchema(transformed);
-  return transformed;
+  return transformed as SpecTypesV2.SchemaObject;
 }
 
 function getMimeTypes() {
