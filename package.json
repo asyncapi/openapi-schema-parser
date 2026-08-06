@@ -48,6 +48,9 @@
     "LICENSE",
     "README.md"
   ],
+  "engines" : {
+    "node" : ">=18"
+  },
   "dependencies": {
     "@asyncapi/parser": "^3.6.0",
     "@openapi-contrib/openapi-schema-to-json-schema": "~3.2.0",
