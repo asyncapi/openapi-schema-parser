@@ -1,5 +1,9 @@
 # OpenAPI Schema Parser
 
+> **This repository has moved.**  
+> `@asyncapi/openapi-schema-parser` is now maintained inside [`asyncapi/parser-js`](https://github.com/asyncapi/parser-js) as a monorepo package at [`packages/openapi-schema-parser`](https://github.com/asyncapi/parser-js/tree/master/packages/openapi-schema-parser).  
+> Please open new issues and pull requests there. The npm package name and public API are unchanged.
+
 An AsyncAPI schema parser for OpenAPI 3.0.x and Swagger 2.x schemas.
 
 > **Note**
