@@ -64,6 +64,15 @@ function ajvToSpectralResult(path: Array<string | number>, errors: ErrorObject[]
 }
 
 function iterateSchema(schema: any) {
+  if (!schema || typeof schema !== 'object') {
+    return;
+  }
+
+  if (schema.xml !== undefined) {
+    schema['x-xml'] = schema.xml;
+    delete schema.xml;
+  }
+
   if (schema.example !== undefined) {
     const examples = schema.examples || [];
     examples.push(schema.example);
@@ -87,15 +96,21 @@ function iterateSchema(schema: any) {
 }
 
 function aliasProps(obj: any) {
+  if (!obj || typeof obj !== 'object') {
+    return;
+  }
+
   for (const key in obj) {
     const prop = obj[key];
 
-    if (prop.xml !== undefined) {
-      prop['x-xml'] = prop.xml;
-      delete prop.xml;
-    }
+    if (prop && typeof prop === 'object') {
+      if (prop.xml !== undefined) {
+        prop['x-xml'] = prop.xml;
+        delete prop.xml;
+      }
 
-    iterateSchema(obj[key]);
+      iterateSchema(prop);
+    }
   }
 }
 
