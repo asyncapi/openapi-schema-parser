@@ -133,6 +133,44 @@ describe('OpenAPISchemaParser', function () {
     ]);
   });
 
+  it('should alias xml property to x-xml on root and nested schemas', async function() {
+    const input: ParseSchemaInput = {
+      ...inputWithValidOpenApi3,
+      data: {
+        type: 'object',
+        xml: { name: 'rootElement' },
+        properties: {
+          item: {
+            type: 'string',
+            xml: { name: 'itemElement', attribute: true }
+          }
+        }
+      }
+    };
+    const result = await parser.parse(input);
+    expect(result['x-xml']).toEqual({ name: 'rootElement' });
+    expect(result.xml).toBeUndefined();
+    expect((result.properties as any).item['x-xml']).toEqual({ name: 'itemElement', attribute: true });
+    expect((result.properties as any).item.xml).toBeUndefined();
+  });
+
+  it('should handle boolean and primitive schema properties safely without errors', async function() {
+    const input: ParseSchemaInput = {
+      ...inputWithValidOpenApi3,
+      data: {
+        type: 'object',
+        properties: {
+          flag: true as any,
+          nullableProp: null as any
+        },
+        additionalProperties: false
+      }
+    };
+    const result = await parser.parse(input);
+    expect(result).toBeDefined();
+    expect(result.additionalProperties).toEqual(false);
+  });
+
   async function doParseTest(originalInput: ParseSchemaInput, expectedOutput: string) {
     const input = { ...originalInput };
     const result = await parser.parse(input);
